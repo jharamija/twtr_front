@@ -19,27 +19,28 @@ function validatePass(){
     return props.value.password === props.value.password2;
 }
 
-function signin(event){
+function signup(event){
     if(!validatePass()){
         event.preventDefault();
+        return;
     }
-
-    alert('hello');
-    // axios.post('http://127.0.0.1:8000/users', props.value, {
-    // })
-    // .then(response => {
-    //     console.log('Response: ', response.data);
-    //     alert('success');
-    // })
-    // .catch(error => {
-    //     console.error('Error: ', error.response.data);
-    // });
+    console.log(props.value)
+    // alert('hello');
+    axios.post('http://127.0.0.1:8000/users', props.value, {
+    })
+    .then(response => {
+        console.log('Response: ', response.data);
+        alert('success');
+    })
+    .catch(error => {
+        console.error('Error: ', error.response.data);
+    });
 }
 </script>
 
 <template>
     <div class="greetings">
-        <form @submit.prevent="signin">
+        <form @submit.prevent="signup">
             <label for="name">username</label><br>
             <input type="text" id="name" v-model="props.name" />
             <br>
@@ -55,7 +56,7 @@ function signin(event){
             <br>
             <span v-if="buttonClicked.valueOf() && !validatePass()" class="error-message">Passwords do not match</span>
             <br>
-            <input type="submit" @click="buttonClicked = true" value="Sign in" />
+            <input type="submit" @click="buttonClicked = true" value="Sign up" />
             <nav><RouterLink to="/login">Back to login</RouterLink></nav>
         </form>
     </div>

@@ -18,7 +18,7 @@ function submitUser(){
         alert('success');
     })
     .catch(error => {
-        console.error('Error: ', error.response.data);
+        console.error('Error: ', error.response.value);
     });
 }
 </script>

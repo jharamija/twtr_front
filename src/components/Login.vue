@@ -5,36 +5,42 @@ import { RouterLink } from 'vue-router';
 // import VBtn from 'vuetify/lib/components/VBtn';
 
 const props = ref({
-    name: '',
     email: '',
     password: '',
+    // rememberMeToken: false,
 })
 
 function login(){
-    alert("Login")
-    // axios.post('http://127.0.0.1:8000/users', props.value, {
-    // })
-    // .then(response => {
-    //     console.log('Response: ', response.data);
-    //     alert('success');
-    // })
-    // .catch(error => {
-    //     console.error('Error: ', error.response.data);
-    // });
+    // alert('hello');
+    axios.post('http://127.0.0.1:8000/login', props.value, {
+    })
+    .then(response => {
+        console.log('Response: ', response);
+        
+        // if(response.data.redirect)
+        
+        alert('success');
+    })
+    .catch(error => {
+        console.error('Error: ', error);
+    });
 }
 </script>
 
 <template>
     <div class="greetings">
         <form @submit.prevent="login">
-            <label for="name">username</label><br>
-            <input type="text" id="name" v-model="props.name" />
+            <label for="name">email</label><br>
+            <input type="text" id="name" v-model="props.email" />
             <br>
             <label for="pass">password</label><br>
             <input type="password" id="pass" v-model="props.password" />
-            <br>
             <br><br>
+            <!-- <input type="checkbox" id="rememberMe" v-model="props.rememberMeToken" />&nbsp
+            <label for="rememberMe">Remember me </label>
+            <br> -->
             <input type="submit" value="Log in" />
+            <br>
             <nav><RouterLink to="/signup">New user?</RouterLink></nav>
         </form>
     </div>
