@@ -1,7 +1,8 @@
 <script setup>
-import axios from 'axios';
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import axios from 'axios'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import router from '../router'
 // import VBtn from 'vuetify/lib/components/VBtn';
 
 const props = ref({
@@ -24,23 +25,31 @@ function signup(event){
         event.preventDefault();
         return;
     }
-    console.log(props.value)
-    // alert('hello');
+
     axios.post('http://127.0.0.1:8000/users', props.value, {
     })
     .then(response => {
-        console.log('Response: ', response.data);
-        alert('success');
+        console.log('Response: ', response);
+        
+        if(response.data.redirect){
+            router.push(response.data.redirect);
+        }
     })
     .catch(error => {
-        console.error('Error: ', error.response.data);
+        console.error('Error: ', error);
+        console.log('Response: ', error.response.data);
+
+        alert(error.response.data.errors.email);
+        if(response.data.redirect){
+            router.push(error.response.data.redirect);
+        }
     });
 }
 </script>
 
 <template>
     <div class="greetings">
-        <form @submit.prevent="signup">
+        <form @submit="signup">
             <label for="name">username</label><br>
             <input type="text" id="name" v-model="props.name" />
             <br>

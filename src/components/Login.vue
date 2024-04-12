@@ -1,7 +1,8 @@
 <script setup>
-import axios from 'axios';
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import axios from 'axios'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import router from '../router'
 // import VBtn from 'vuetify/lib/components/VBtn';
 
 const props = ref({
@@ -11,25 +12,30 @@ const props = ref({
 })
 
 function login(){
-    // alert('hello');
     axios.post('http://127.0.0.1:8000/login', props.value, {
     })
     .then(response => {
         console.log('Response: ', response);
         
-        // if(response.data.redirect)
-        
-        alert('success');
+        if(response.data.redirect){
+            router.push(response.data.redirect);
+        }
     })
     .catch(error => {
         console.error('Error: ', error);
+        console.log('Response: ', error.response.data);
+
+        alert(error.response.data.errors.email);
+        if(response.data.redirect){
+            router.push(error.response.data.redirect);
+        }
     });
 }
 </script>
 
 <template>
     <div class="greetings">
-        <form @submit.prevent="login">
+        <form @submit="login">
             <label for="name">email</label><br>
             <input type="text" id="name" v-model="props.email" />
             <br>
