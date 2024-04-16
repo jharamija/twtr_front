@@ -31,9 +31,10 @@ function signup(event){
     .then(response => {
         console.log('Response: ', response);
         
-        if(response.data.redirect){
-            router.push(response.data.redirect);
-        }
+        // if(response.data.redirect){
+        //     router.push(response.data.redirect);
+        // }
+        router.push('/login')
     })
     .catch(error => {
         console.error('Error: ', error);
@@ -49,7 +50,7 @@ function signup(event){
 
 <template>
     <div class="greetings">
-        <form @submit="signup">
+        <form @submit.prevent="signup">
             <label for="name">username</label><br>
             <input type="text" id="name" v-model="props.name" />
             <br>

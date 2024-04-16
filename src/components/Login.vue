@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import router from '../router'
+import { useUserStore } from '@/stores/UserStore'
 // import VBtn from 'vuetify/lib/components/VBtn';
 
 const props = ref({
@@ -16,26 +17,24 @@ function login(){
     })
     .then(response => {
         console.log('Response: ', response);
-        
-        if(response.data.redirect){
-            router.push(response.data.redirect);
-        }
+
+        useUserStore().setToken(response.data.access_token);
+        useUserStore().setUser(response.data.user);
+
+        router.push('/about');
     })
     .catch(error => {
         console.error('Error: ', error);
         console.log('Response: ', error.response.data);
 
         alert(error.response.data.errors.email);
-        if(response.data.redirect){
-            router.push(error.response.data.redirect);
-        }
     });
 }
 </script>
 
 <template>
     <div class="greetings">
-        <form @submit="login">
+        <form @submit.prevent="login">
             <label for="name">email</label><br>
             <input type="text" id="name" v-model="props.email" />
             <br>

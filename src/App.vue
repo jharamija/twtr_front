@@ -1,16 +1,21 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+const props = defineProps([
+    'showHeader'
+]);
 </script>
 
 <template>
-  <header>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="You did it!" /> -->
 
-      <nav>
+      <!-- <nav v-if="showHeader"> -->
+      <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/posts/create">Create post</RouterLink>
@@ -18,7 +23,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/login">Login</RouterLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
   <RouterView />
 </template>
@@ -61,8 +66,12 @@ nav a:first-of-type {
 
 @media (min-width: 1024px) {
   header {
+    /* position: fixed;
+    bottom: 0;
+    width: 100%; */
     display: flex;
-    place-items: center;
+    /* justify-content: center; */
+    align-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
 
@@ -72,7 +81,7 @@ nav a:first-of-type {
 
   header .wrapper {
     display: flex;
-    place-items: flex-start;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 
