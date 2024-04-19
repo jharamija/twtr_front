@@ -46,14 +46,6 @@ const router = createRouter({
     ]
 })
 
-router.beforeEach((to, from, next) => {
-    const hideHeader = ['/home'];
-
-    to.meta.showHeader = !hideHeader.includes(to.path);
-
-    next();
-});
-
 // Route guard
 // router.beforeEach(( to, from, next ) => {
 //     const isAuthenticated

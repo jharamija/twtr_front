@@ -20,23 +20,18 @@ function validatePass(){
     return props.value.password === props.value.password2;
 }
 
-function signup(event){
-    if(!validatePass()){
-        event.preventDefault();
-        return;
-    }
+async function signup(event){
+    try {
+        if(!validatePass()){
+            event.preventDefault();
+            return;
+        }
 
-    axios.post('http://127.0.0.1:8000/users', props.value, {
-    })
-    .then(response => {
+        const response = await axios.post('http://127.0.0.1:8000/users', props.value);
         console.log('Response: ', response);
-        
-        // if(response.data.redirect){
-        //     router.push(response.data.redirect);
-        // }
+
         router.push('/login')
-    })
-    .catch(error => {
+    } catch(error) {
         console.error('Error: ', error);
         console.log('Response: ', error.response.data);
 
@@ -44,7 +39,7 @@ function signup(event){
         if(response.data.redirect){
             router.push(error.response.data.redirect);
         }
-    });
+    }
 }
 </script>
 

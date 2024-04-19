@@ -3,6 +3,7 @@ import axios from 'axios'
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore';
+import router from '../router'
 
 const getUID = ref(null);
 const delUID = ref(null);
@@ -10,53 +11,49 @@ const token = useUserStore().token;
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-// const headers = {
-//     'Authorization': 'Bearer ' + token,
-//     // 'Content-Type' = 'application/json',
-// };
-
-function getUser() {
-    axios.get('http://127.0.0.1:8000/users/' + getUID.value)
-    .then(response => {
+async function getUser() {
+    try {
+        const response = await axios.get('http://127.0.0.1:8000/auth/users/' + getUID.value);
         console.log(response.data);
-        alert('success');
-    }).catch(error => {
+    } catch(error) {
         console.error('Error: ', error);
         alert(error.response.data.error);
-    });
+    }
 }
 
-function deleteUser() {
-    axios.delete('http://127.0.0.1:8000/auth/users/' + delUID.value)
-    .then(response => {
+async function deleteUser() {
+    try {
+        const response = await axios.delete('http://127.0.0.1:8000/auth/users/' + delUID.value);
         console.log(response.data);
         alert('success');
-    }).catch(error => {
+    } catch(error) {
         console.error('Error: ', error);
         alert(error.response.data.error);
-    });
+    }
 }
 
-function testMe() {
+async function testMe() {
     // console.log('aboutToken: ', token)
-    axios.post('http://127.0.0.1:8000/auth/me')
-    .then(response => {
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/auth/me');
         console.log(response.data);
-    }).catch(error => {
+    } catch(error) {
         console.error('Error: ', error);
         console.log(error.response.data);
-    });
+    }
 }
 
-function logout() {
-    axios.post('http://127.0.0.1:8000/auth/logout')
-    .then(response => {
-        useUserStore().clearToken();
+async function logout() {
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/auth/logout');
         console.log(response.data);
-    }).catch(error => {
+
+        useUserStore().clearToken();
+        router.push('/login');
+    } catch(error) {
         console.error('Error: ', error);
         console.log(error.response.data);
-    });
+    }
 }
 </script>
 

@@ -12,23 +12,22 @@ const props = ref({
     // rememberMeToken: false,
 })
 
-function login(){
-    axios.post('http://127.0.0.1:8000/login', props.value, {
-    })
-    .then(response => {
+async function login(){
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/auth/login', props.value);
+
         console.log('Response: ', response);
 
         useUserStore().setToken(response.data.access_token);
         useUserStore().setUser(response.data.user);
 
         router.push('/about');
-    })
-    .catch(error => {
+    } catch(error) {
         console.error('Error: ', error);
         console.log('Response: ', error.response.data);
 
         alert(error.response.data.errors.email);
-    });
+    }
 }
 </script>
 

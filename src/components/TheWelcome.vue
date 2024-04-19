@@ -7,13 +7,14 @@ import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
 import axios from 'axios'
 
-function testGetMethod() {
-    axios.get('http://127.0.0.1:8000/users').then(response => {
+async function testGetMethod() {
+    try {
+        const response = await axios.get('http://127.0.0.1:8000/auth/users');
         const responseDataString = JSON.stringify(response.data);
         alert(responseDataString);
-    }).catch(error => {
+    } catch(error) {
         console.error('Error fetching data: ', error);
-    });
+    }
 }
 </script>
 

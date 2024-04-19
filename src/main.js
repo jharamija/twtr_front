@@ -4,6 +4,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 // import Vuetify from 'vuetify/lib'
 
 // const vuetify = new Vuetify({})
@@ -17,5 +19,6 @@ const pinia = createPinia()
 
 app.use(router)
 app.use(pinia)
+app.use(VueSidebarMenu)
 
 app.mount('#app')
