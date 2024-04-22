@@ -1,9 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/UserStore';
+import axios from 'axios'
+
 import HomeView from '../views/HomeView.vue'
 import CreatePostView from '../views/CreatePostView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
 import HomepageView from '../views/HomepageView.vue'
+
+async function getPosts(to) {
+    try {
+        const response = await axios.get('http://127.0.0.1:8000/posts');
+        to.params.posts = response.data;
+
+        // console.log(response.data);
+    } catch(error) {
+        console.error('Error: ', error);
+        alert(error.response.data.error);
+    }
+}
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +28,7 @@ const router = createRouter({
             // name: 'home',
             // component: HomeView
             path: '/',
-            redirect: { path: '/login' }
+            redirect: { path: '/home' }
         },
         {
             path: '/about',
@@ -41,14 +56,20 @@ const router = createRouter({
         {
             path: '/home',
             name: 'homepage',
-            component: HomepageView
+            component: HomepageView,
+            beforeEnter: [ getPosts ],
         },
     ]
-})
+});
 
-// Route guard
-// router.beforeEach(( to, from, next ) => {
-//     const isAuthenticated
-// })
+// checks if user is authenticated
+router.beforeEach(( to, from ) => {
+    const isAuth = useUserStore().checkIfAuth();
+    if(!isAuth && to.name !== 'login' && to.name !== 'signup'){
+        return {
+            name: 'login',
+        };
+    }
+});
 
 export default router

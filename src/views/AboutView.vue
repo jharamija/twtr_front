@@ -60,21 +60,23 @@ async function logout() {
 <template>
   <form>
     <label for="getUID">test get single user by ID</label><br>
-    <input type="getUID" id="getUID" v-model="getUID" />
+    <input type="input" id="getUID" v-model="getUID" />
     <br>
-    <input type="submit" @click.prevent="getUser" value="search" />
+    <input type="submit" id="getUIDbtn" @click.prevent="getUser" value="search" />
     <br><br>
     <label for="delUID">test delete user by ID</label><br>
-    <input type="delUID" id="delUID" v-model="delUID" />
+    <input type="input" id="delUID" v-model="delUID" />
     <br>
-    <input type="submit" @click.prevent="deleteUser" value="delete" />
+    <input type="submit" id="deleteBtn" @click.prevent="deleteUser" value="delete" />
     <br><br>
     <label for="testMe">test '/me' route</label><br>
-    <input type="submit" @click.prevent="testMe()" value="testMe" />
+    <input type="submit" id="testMe" @click.prevent="testMe()" value="testMe" />
     <br><br>
     <label for="logout">test logout</label><br>
-    <input type="submit" @click.prevent="logout()" value="logout" />
+    <input type="submit" id="logout" @click.prevent="logout()" value="logout" />
   </form>
+  <br>
+  <RouterLink to="/home">Home</RouterLink>
 </template>
 
 <style>
