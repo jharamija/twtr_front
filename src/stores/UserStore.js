@@ -27,7 +27,7 @@ export const useUserStore = defineStore('userStore', {
             localStorage.setItem('user', null);
         },
         checkIfAuth() {
-            if(localStorage.getItem('jwtToken') === 'null'){
+            if(localStorage.getItem('jwtToken') === 'null' || localStorage.getItem('jwtToken') === null){
                 return false;
             }
             return true;

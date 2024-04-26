@@ -115,9 +115,9 @@ const menu = [
 <template>
     <!-- <sidebar-menu :menu="menu" /> -->
     <SidebarMenu :menu="menu">
-        <template v-slot:header>header</template>
+        <!-- <template v-slot:header>header</template>
         <template v-slot:footer>footer</template>
-        <template v-slot:toggle-icon>toggle-icon</template>
+        <template v-slot:toggle-icon>toggle-icon</template> -->
         <template v-slot:dropdown-icon="{ isOpen }">
             <span v-if="!isOpen">+</span>
             <span v-else>-</span>

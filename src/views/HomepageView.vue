@@ -6,27 +6,37 @@ import Suggestions from '../components/Suggestions.vue'
 
 <template>
     <main>
-        <div class="flex-container">
-            <Sidebar />
-            <Homepage class="home-page" />
-            <Suggestions class="suggestions" />
-        </div>
+        <!-- <Sidebar /> -->
+        <Homepage class="home-page" />
+        <Suggestions class="suggestions" />
     </main>
 </template>
 
 <style scoped>
-.flex-container {
+main {
     display: flex;
-    /* height: 300px; */
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: stretch;
+    /* justify-content: space-between; */
+    /* align-items: stretch; */
+
+    height: auto;
+    width: auto;
+    border-style: dotted;
+    border-color: blue;
 }
 
 .home-page{
     padding-right: calc(var(--section-gap) / 2);
+    border-style: dotted;
+    flex: 1;
 }
 .suggestions{
     padding-right: calc(var(--section-gap) / 2);
+    border-style: dotted;
+    border-color: red;
+    
+    /* align-self: flex-start;
+    position: sticky;
+    top: 0; */
 }
 </style>

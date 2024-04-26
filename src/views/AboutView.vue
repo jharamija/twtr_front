@@ -40,6 +40,9 @@ async function testMe() {
     } catch(error) {
         console.error('Error: ', error);
         console.log(error.response.data);
+
+        useUserStore().clearToken();
+        useUserStore().clearUser();
     }
 }
 
@@ -49,6 +52,7 @@ async function logout() {
         console.log(response.data);
 
         useUserStore().clearToken();
+        useUserStore().clearUser();
         router.push('/login');
     } catch(error) {
         console.error('Error: ', error);

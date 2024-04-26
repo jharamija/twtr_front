@@ -1,7 +1,28 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted, onBeforeUnmount } from 'vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
+const clearLocalStorage = () => {
+    isRefreshing = false;
+    localStorage.clear();
+};
+
+// onBeforeUnmount(() => {
+//     clearLocalStorage();
+// });
+
+onMounted(() => {
+    window.addEventListener('unload', clearLocalStorage);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('unload', clearLocalStorage);
+});
+
+// window.addEventListener('beforeunload', () => {
+//     isRefreshing = true;
+// });
 </script>
 
 <template>

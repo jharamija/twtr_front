@@ -2,11 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore';
 import axios from 'axios'
 
-import HomeView from '../views/HomeView.vue'
+// import HomeView from '../views/HomeView.vue'
 import CreatePostView from '../views/CreatePostView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
 import HomepageView from '../views/HomepageView.vue'
+import UserView from '../views/UserView.vue'
 
 async function getPosts(to) {
     try {
@@ -28,7 +29,7 @@ const router = createRouter({
             // name: 'home',
             // component: HomeView
             path: '/',
-            redirect: { path: '/home' }
+            redirect: { path: '/home' },
         },
         {
             path: '/about',
@@ -36,22 +37,22 @@ const router = createRouter({
             // route level code-splitting
             // this generates a separate chunk (About.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
-            component: () => import('../views/AboutView.vue')
+            component: () => import('../views/AboutView.vue'),
         },
         {
             path: '/posts/create',
             name: 'createPost',
-            component: CreatePostView
+            component: CreatePostView,
         },
         {
             path: '/login',
             name: 'login',
-            component: LoginView
+            component: LoginView,
         },
         {
             path: '/signup',
             name: 'signup',
-            component: SignupView
+            component: SignupView,
         },
         {
             path: '/home',
@@ -59,11 +60,18 @@ const router = createRouter({
             component: HomepageView,
             beforeEnter: [ getPosts ],
         },
+        {
+            path: '/user/:id',
+            name: 'user',
+            params: 'user_id',
+            component: UserView,
+        },
     ]
 });
 
 // checks if user is authenticated
 router.beforeEach(( to, from ) => {
+    // console.log(useUserStore().token);
     const isAuth = useUserStore().checkIfAuth();
     if(!isAuth && to.name !== 'login' && to.name !== 'signup'){
         return {
