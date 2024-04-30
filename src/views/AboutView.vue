@@ -78,9 +78,9 @@ async function logout() {
     <br><br>
     <label for="logout">test logout</label><br>
     <input type="submit" id="logout" @click.prevent="logout()" value="logout" />
+    <br><br>
+    <RouterLink to="/">Home</RouterLink>
   </form>
-  <br>
-  <RouterLink to="/home">Home</RouterLink>
 </template>
 
 <style>

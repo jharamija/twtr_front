@@ -5,19 +5,15 @@ import Suggestions from '../components/Suggestions.vue'
 </script>
 
 <template>
-    <main>
-        <!-- <Sidebar /> -->
-        <Homepage class="home-page" />
-        <Suggestions class="suggestions" />
-    </main>
+    <Homepage />
 </template>
 
 <style scoped>
-main {
+/* main {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
-    /* align-items: stretch; */
+    // justify-content: space-between;
+    // align-items: stretch;
 
     height: auto;
     width: auto;
@@ -25,18 +21,13 @@ main {
     border-color: blue;
 }
 
-.home-page{
-    padding-right: calc(var(--section-gap) / 2);
-    border-style: dotted;
-    flex: 1;
-}
 .suggestions{
     padding-right: calc(var(--section-gap) / 2);
     border-style: dotted;
     border-color: red;
     
-    /* align-self: flex-start;
-    position: sticky;
-    top: 0; */
-}
+    // align-self: flex-start;
+    // position: sticky;
+    // top: 0;
+} */
 </style>

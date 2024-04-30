@@ -1,10 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { faUser } from '@awesome.me/kit-regular/icons/classic/solid'
+// import { faUser } from '@fortawesome/free-regular/icons/classic/solid'
+
+// import { library } from "@fortawesome/fontawesome-svg-core"
+// import { faUser } from "@fortawesome/free-regular-svg-icons"
+// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 
 import './Post.vue'
+
+// library.add(faUser);
 
 const posts = ref([]);
 const route = useRoute();
@@ -15,28 +21,28 @@ onMounted(async () => {
 </script>
 
 <template>
-    <!-- <div>
-        hello
-    </div> -->
-    <ul>
+    <!-- <router-view></router-view> -->
+    <ul class="home-page">
         <Post v-for="(post, index) in posts" :key="index" :post="post">
             <div class="post">
                 <div class="top">
                     <!-- <img src="" alt="pfp"></img> -->
-                    <!-- <font-awesome-icon icon="user" /> -->
-                    <RouterLink to="{ name: 'user', params: { id: user_id } }">{{ post.user.name }}</RouterLink>
+                    <!-- <font-awesome-icon icon="fas fa-user" /> -->
+                    <!-- <font-awesome-icon icon="User" /> -->
+                    <i class="far fa-user"></i>
+                    <router-link :to="{ name: 'user', params: { id: post.user_id } }">{{ post.user.name }}</router-link>
                 </div>
 
                 <div>{{ post.body }}</div>
 
                 <div class="bottom">
-                    <!-- <font-awesome-icon icon="like" /> -->
+                    <i class="far fa-heart"></i>
                     <div>{{ post.likes }}</div>
 
-                    <!-- <font-awesome-icon icon="comment" /> -->
+                    <i class="far fa-comment"></i>
                     <div>{{ post.comments }}</div>
 
-                    <!-- <font-awesome-icon icon="share" /> -->
+                    <i class="far fa-share-from-square"></i>
                     <div>{{ post.retweets }}</div>
                 </div>
             </div><br>
@@ -45,6 +51,13 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.home-page{
+    padding-right: calc(var(--section-gap) / 2);
+    border: dotted green;
+    flex: 1;
+    padding-right: 10px;
+}
+
 .post {
     border: 1px solid red;
     display: flex;
@@ -62,7 +75,11 @@ onMounted(async () => {
 .bottom {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     /* border-style: solid; */
+}
+
+.far {
+    padding: 5px 2px 6px 5px;
 }
 </style>

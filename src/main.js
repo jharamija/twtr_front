@@ -13,9 +13,6 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 // Vue.use(vuetify)
 const app = createApp(App)
 const pinia = createPinia()
-// const app = new Vue({
-//     render: h => h(App)
-// })
 
 app.use(router)
 app.use(pinia)
